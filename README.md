@@ -1,5 +1,5 @@
 
-## Project name
+## Project Name
 ```
 tiger
 ```
@@ -16,7 +16,7 @@ tiger
 yarn
 ```
 
-## Project structure
+## Project Structure
 ```
 ├─target
   ├─ bin
