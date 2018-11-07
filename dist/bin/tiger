@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+
+// 定义脚手架的文件路径
+process.env.NODE_PATH = __dirname + '/../node_modules/'
+const { resolve } = require('path')
+const res = command => resolve(__dirname, '../commands/', command)
+const program = require('commander')
+
+// 定义当前版本
+program
+  .version(require('../../package').version)
+
+// 定义使用方法
+program 
+  .usage('<command>')
+
+// 添加脚手架
+program
+  .command('add -p')
+  .description('Add a new project')
+  .alias('ap')
+  .action(() => {
+    require(res('add-p'))()
+  })
+
+// 添加公共组件库
+program
+  .command('add -c')
+  .description('Add a new Component')
+  .alias('ac')
+  .action(() => {
+    require(res('add-c'))()
+  })
+
+// 列出所有已有的库
+program
+  .command('list')
+  .description('List all the project && components')
+  .alias('l')
+  .action(() => {
+    require(res('list'))()
+  })
+
+// 初始化一个项目
+program
+  .command('init')
+  .description('Generate a new project')
+  .alias('i')
+  .action(() => {
+    require(res('init'))()
+  })
+
+// 删除一个模板
+program
+  .command('delete -p')
+  .description('Delete a project')
+  .alias('dp')
+  .action(() => {
+    require(res('delete-p'))()
+  })
+
+// 删除一个组件
+program
+  .command('delete -c')
+  .description('Delete a component')
+  .alias('dc')
+  .action(() => {
+    require(res('delete-c'))()
+  })
+
+program.parse(process.argv)
+
+if(!program.args.length){
+  program.help()
+}
